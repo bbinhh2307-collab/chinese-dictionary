@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>HSK Dictionary FULL COMPLETE</title>
+
+<style>
+body{
+font-family:Arial;
+max-width:950px;
+margin:auto;
+padding:20px;
+background:#fff;
+}
+
+.wordBox{
+text-align:center;
+margin-bottom:15px;
+}
+
+.hanzi{
+font-size:85px;
+line-height:1;
+}
+
+.pinyin{
+font-size:22px;
+color:#666;
+margin-top:5px;
+}
+
+.card{
+border:1px solid #ddd;
+padding:20px;
+border-radius:12px;
+}
+
+button{
+padding:10px 15px;
+margin:5px;
+border-radius:8px;
+cursor:pointer;
+}
+
+pre{
+white-space:pre-wrap;
+font-size:15px;
+line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📘 HSK Dictionary FULL COMPLETE</h1>
+
+<div class="card">
+
+<div id="word"></div>
+
+<div style="text-align:center;">
+<button onclick="prev()">⬅</button>
+<button onclick="next()">➡</button>
+<button onclick="playAudio()">🔊</button>
+</div>
+
+<pre id="content"></pre>
+
+</div>
+
+<script>
+
+const words=[
+
+/* ======================= 老 ======================= */
+{
+char:"老",
+pinyin:"lǎo",
+content:`1. 老
+
+注音：ㄌㄠˇ
+IPA：lɑʊ̯²¹⁴
+漢越音：lão
+HSK 1 / TOCFL 1
+
+① Lớn tuổi
+年紀大，與「少」相對。
+谓语：他的父母已经很老了。
+Tā de fùmǔ yǐjīng hěn lǎo le。
+→ Bố mẹ anh ấy đã rất già rồi
+
+② Lão luyện
+老练的、富有经验的。
+他是一个很老练的外交官。
+Tā shì yí gè hěn lǎoliàn de wàijiāoguān。
+→ Ông ấy là nhà ngoại giao dày dạn kinh nghiệm
+
+③ Tồn tại lâu
+老问题至今未解决。
+Zhè shì yí gè lǎo wèntí。
+→ Đây là vấn đề cũ
+
+④ Cũ kỹ
+老式衣服
+Tā xǐhuān chuān lǎoshì de yīfu。
+→ Thích đồ kiểu cũ
+
+⑤ màu đậm
+颜色深
+
+⑥ rau già
+这些黄瓜太老了
+→ Dưa chuột đã già
+
+⑦ vật liệu lão hóa
+橡胶老化失去弹性
+→ Cao su bị lão hóa
+
+⑧ nguyên bản
+老习惯 / 老地方
+
+======================
+📚 組詞
+======================
+一家老小
+丁老
+七老八十
+七老八老
+三朝元老
+三老
+不伏老
+不服老
+不老气
+不老药
+不老长生
+
+======================
+🔗 同義詞
+======================
+古 / 长 / 耆 / 逝
+
+======================
+❌ 反義詞
+======================
+新 / 小 / 少 / 嫩
+
+======================
+📖 成語
+======================
+白头偕老
+返老还童
+老蚌生珠
+老成持重
+老当益壮
+老骥伏枥
+老奸巨猾
+老马识途
+老谋深算`
+},
+
+/* ======================= 便宜 ======================= */
+{
+char:"便宜",
+pinyin:"piányi",
+content:`2. 便宜
+
+注音：ㄆㄧㄢˊ ㄧˊ
+漢越音：tiện nghi
+HSK 2 / TOCFL 1
+
+① rẻ
+东西的价钱低
+这件衣服很便宜
+→ Rất rẻ
+
+② lợi thế
+占了很大的便宜
+→ Có lợi thế
+
+③ lợi dụng
+占别人的便宜
+→ Lợi dụng người khác
+
+④ bị hời
+这次便宜你了
+→ Lần này cho cậu lợi
+
+======================
+📚 組詞
+======================
+便宜货
+便宜商品
+占便宜
+便宜他人
+
+======================
+🔗 同義詞
+======================
+廉价
+省钱
+低廉
+贱卖
+
+======================
+❌ 反義詞
+======================
+昂贵
+珍贵
+值钱
+高昂`
+},
+
+/* ======================= 麻烦 ======================= */
+{
+char:"麻烦",
+pinyin:"máfan",
+content:`3. 麻烦
+
+注音：ㄇㄚˊ ㄈㄢˊ
+漢越音：ma phiền
+HSK 3 / TOCFL 2
+
+① phiền phức
+这个程序太麻烦了
+→ Quá rắc rối
+
+② rắc rối
+给家里添麻烦
+→ Gây rắc rối cho gia đình
+
+③ nhờ vả
+麻烦你帮我打印一下
+→ Làm phiền bạn giúp tôi
+
+======================
+📚 組詞
+======================
+添麻烦
+惹麻烦
+找麻烦
+捣麻烦
+
+======================
+🔗 同義詞
+======================
+困难
+烦恼
+难处
+费事
+
+======================
+❌ 反義詞
+======================
+容易
+方便
+顺利
+便利`
+}
+
+];
+
+let index=0;
+
+function render(){
+const w=words[index];
+
+document.getElementById("word").innerHTML=`
+<div class="wordBox">
+<div class="hanzi">${w.char}</div>
+<div class="pinyin">${w.pinyin}</div>
+</div>
+`;
+
+document.getElementById("content").innerText=w.content;
+}
+
+function playAudio(){
+const u=new SpeechSynthesisUtterance(words[index].char);
+u.lang="zh-CN";
+speechSynthesis.speak(u);
+}
+
+function next(){
+index=(index+1)%words.length;
+render();
+}
+
+function prev(){
+index=(index-1+words.length)%words.length;
+render();
+}
+
+render();
+
+</script>
+
+</body>
+</html>
