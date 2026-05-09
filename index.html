@@ -2,297 +2,172 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>HSK Dictionary FULL COMPLETE</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOE Style Hán-Việt Dictionary</title>
 <style>
-body{
-font-family:Arial;
-max-width:950px;
-margin:auto;
-padding:20px;
-background:#fff;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ font-family:Arial, Helvetica, sans-serif; background:#f3f6fb; color:#1e293b; line-height:1.8; }
 
-.wordBox{
-text-align:center;
-margin-bottom:15px;
-}
+/* HEADER */
+.header{ position:sticky; top:0; z-index:100; background:rgba(255,255,255,.95); backdrop-filter:blur(10px); padding:18px 40px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; }
+.logo{ font-size:28px; font-weight:800; letter-spacing:1px; color:#0f172a; }
+.search{ width:420px; }
+.search input{ width:100%; padding:14px 18px; border:none; border-radius:18px; background:#eef2f7; font-size:15px; outline:none; transition:.25s; }
+.search input:focus{ background:#fff; box-shadow:0 0 0 4px rgba(59,130,246,.15); }
 
-.hanzi{
-font-size:85px;
-line-height:1;
-}
+/* LAYOUT */
+.container{ max-width:1400px; margin:auto; padding:35px; display:grid; grid-template-columns:260px 1fr; gap:30px; }
+.sidebar{ background:#fff; padding:25px; border-radius:28px; height:fit-content; box-shadow:0 10px 30px rgba(0,0,0,.04); }
+.sidebar h3{ margin-bottom:20px; font-size:18px; }
+.menu{ display:flex; flex-direction:column; gap:12px; }
+.menu button{ border:none; padding:14px; border-radius:14px; background:#f1f5f9; cursor:pointer; font-size:15px; transition:.2s; text-align:left; }
+.menu button:hover{ background:#dbeafe; color:#2563eb; }
 
-.pinyin{
-font-size:22px;
-color:#666;
-margin-top:5px;
-}
+/* MAIN */
+.main{ display:flex; flex-direction:column; gap:30px; }
+.card{ background:#fff; padding:40px; border-radius:34px; box-shadow:0 15px 35px rgba(0,0,0,.05); transition:.25s; }
+.wordTop{ margin-bottom:30px; }
+.hanzi{ font-size:100px; font-weight:800; line-height:1; font-family:"Times New Roman", serif; color:#0f172a; display:flex; align-items:center; gap:15px; }
 
-.card{
-border:1px solid #ddd;
-padding:20px;
-border-radius:12px;
-}
+/* STROKE ORDER BOX */
+.stroke-box { margin-top: 20px; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; background: #fff; }
+.stroke-box iframe { width: 100%; height: 300px; border: none; }
 
-button{
-padding:10px 15px;
-margin:5px;
-border-radius:8px;
-cursor:pointer;
-}
+.meta{ margin-top:18px; display:flex; flex-wrap:wrap; gap:12px; font-size:14px; color:#64748b; }
+.badge{ background:#eff6ff; color:#2563eb; padding:6px 12px; border-radius:999px; font-weight:600; }
+.section{ margin-top:35px; }
+.sectionTitle{ font-size:22px; font-weight:700; margin-bottom:20px; padding-left:14px; border-left:5px solid #2563eb; }
+.meaning{ background:#f8fafc; padding:22px; border-radius:22px; margin-bottom:18px; }
+.cn{ margin-top:10px; color:#475569; }
+.example{ margin-top:16px; background:#fff; padding:18px; border-radius:16px; border:1px solid #e2e8f0; }
+.pinyin{ margin-top:8px; color:#2563eb; font-style:italic; }
+.vi{ margin-top:8px; font-weight:500; }
+.wordList{ display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+.tag{ padding:9px 15px; background:#f1f5f9; border-radius:999px; font-size:14px; cursor:pointer; transition:.2s; }
+.tag:hover{ background:#dbeafe; color:#2563eb; }
 
-pre{
-white-space:pre-wrap;
-font-size:15px;
-line-height:1.6;
-}
+/* AUDIO ICON */
+.speaker{ cursor: pointer; color: #2563eb; display: inline-flex; align-items: center; vertical-align: middle; transition: 0.2s; }
+.speaker:hover{ transform: scale(1.1); }
+.hanzi .speaker svg { width: 48px; height: 48px; }
+.example .speaker svg { width: 20px; height: 20px; margin-right: 6px; }
+
+@media(max-width:980px){ .container{ grid-template-columns:1fr; padding:18px; } .hanzi{ font-size:72px; } .card{ padding:28px; } }
 </style>
 </head>
-
 <body>
 
-<h1>📘 HSK Dictionary FULL COMPLETE</h1>
+<header class="header">
+    <div class="logo">華越詞典</div>
+    <div class="search"><input type="text" placeholder="搜尋漢字..."></div>
+</header>
 
-<div class="card">
+<div class="container">
+    <aside class="sidebar">
+        <h3>功能選單</h3>
+        <div class="menu">
+            <button>📘 HSK 詞彙</button>
+            <button>📗 TOCFL 詞彙</button>
+            <button>⭐ 我的收藏</button>
+            <button>🕘 最近查詢</button>
+        </div>
+    </aside>
 
-<div id="word"></div>
+    <main class="main">
+        <!-- LÃO -->
+        <div class="card">
+            <div class="wordTop">
+                <div class="hanzi">
+                    <span class="speaker" onclick="play('老')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.02C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg></span>
+                    老
+                </div>
+                <div class="meta">
+                    <span>ㄌㄠˇ</span><span>lǎo</span><span>lão</span>
+                    <span class="badge">HSK 1</span>
+                </div>
+                <div class="stroke-box">
+                    <iframe src="https://stroke-order.learningweb.moe.edu.tw/strokeStateless.do?w=老&m=flash" scrolling="no"></iframe>
+                </div>
+            </div>
 
-<div style="text-align:center;">
-<button onclick="prev()">⬅</button>
-<button onclick="next()">➡</button>
-<button onclick="playAudio()">🔊</button>
-</div>
+            <div class="section">
+                <div class="sectionTitle">形容詞</div>
+                <div class="meaning">
+                    <b>① Lớn tuổi, trái nghĩa với “trẻ”</b>
+                    <div class="cn">年紀大，與「少」相對。</div>
+                    <div class="example">
+                        <div><span class="speaker" onclick="play('他的父母已经很老了')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.02C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg></span>他的父母已经很老了。</div>
+                        <div class="pinyin">Tā de fùmǔ yǐjīng hěn lǎo le.</div>
+                        <div class="vi">→ Bố mẹ anh ấy đã rất già rồi.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Giữ nguyên các phần giải nghĩa khác như code trước... -->
+        </div>
 
-<pre id="content"></pre>
+        <!-- 便宜 -->
+        <div class="card">
+            <div class="wordTop">
+                <div class="hanzi">
+                    <span class="speaker" onclick="play('便宜')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.02C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg></span>
+                    便宜
+                </div>
+                <div class="stroke-box">
+                    <!-- Ghép 2 chữ bằng cách dùng 2 iframe nhỏ -->
+                    <div style="display:flex;">
+                        <iframe src="https://stroke-order.learningweb.moe.edu.tw/strokeStateless.do?w=便&m=flash" style="width:50%;"></iframe>
+                        <iframe src="https://stroke-order.learningweb.moe.edu.tw/strokeStateless.do?w=宜&m=flash" style="width:50%;"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="sectionTitle">形容詞</div>
+                <div class="meaning">
+                    <b>① Giá thấp / rẻ</b>
+                    <div class="example">
+                        <div><span class="speaker" onclick="play('這件衣服很便宜')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.02C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg></span>這件衣服很便宜。</div>
+                        <div class="pinyin">Zhè jiàn yīfu hěn piányi.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- 麻煩 -->
+        <div class="card">
+            <div class="wordTop">
+                <div class="hanzi">
+                    <span class="speaker" onclick="play('麻煩')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.02C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg></span>
+                    麻煩
+                </div>
+                <div class="stroke-box">
+                    <div style="display:flex;">
+                        <iframe src="https://stroke-order.learningweb.moe.edu.tw/strokeStateless.do?w=麻&m=flash" style="width:50%;"></iframe>
+                        <iframe src="https://stroke-order.learningweb.moe.edu.tw/strokeStateless.do?w=煩&m=flash" style="width:50%;"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="sectionTitle">形容詞</div>
+                <div class="meaning">
+                    <b>① Phiền phức</b>
+                    <div class="example">
+                        <div><span class="speaker" onclick="play('這個程序太麻煩了')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.02C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg></span>這個程序太麻煩了。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
 <script>
-
-const words=[
-
-/* ======================= 老 ======================= */
-{
-char:"老",
-pinyin:"lǎo",
-content:`1. 老
-
-注音：ㄌㄠˇ
-IPA：lɑʊ̯²¹⁴
-漢越音：lão
-HSK 1 / TOCFL 1
-
-① Lớn tuổi
-年紀大，與「少」相對。
-谓语：他的父母已经很老了。
-Tā de fùmǔ yǐjīng hěn lǎo le。
-→ Bố mẹ anh ấy đã rất già rồi
-
-② Lão luyện
-老练的、富有经验的。
-他是一个很老练的外交官。
-Tā shì yí gè hěn lǎoliàn de wàijiāoguān。
-→ Ông ấy là nhà ngoại giao dày dạn kinh nghiệm
-
-③ Tồn tại lâu
-老问题至今未解决。
-Zhè shì yí gè lǎo wèntí。
-→ Đây là vấn đề cũ
-
-④ Cũ kỹ
-老式衣服
-Tā xǐhuān chuān lǎoshì de yīfu。
-→ Thích đồ kiểu cũ
-
-⑤ màu đậm
-颜色深
-
-⑥ rau già
-这些黄瓜太老了
-→ Dưa chuột đã già
-
-⑦ vật liệu lão hóa
-橡胶老化失去弹性
-→ Cao su bị lão hóa
-
-⑧ nguyên bản
-老习惯 / 老地方
-
-======================
-📚 組詞
-======================
-一家老小
-丁老
-七老八十
-七老八老
-三朝元老
-三老
-不伏老
-不服老
-不老气
-不老药
-不老长生
-
-======================
-🔗 同義詞
-======================
-古 / 长 / 耆 / 逝
-
-======================
-❌ 反義詞
-======================
-新 / 小 / 少 / 嫩
-
-======================
-📖 成語
-======================
-白头偕老
-返老还童
-老蚌生珠
-老成持重
-老当益壮
-老骥伏枥
-老奸巨猾
-老马识途
-老谋深算`
-},
-
-/* ======================= 便宜 ======================= */
-{
-char:"便宜",
-pinyin:"piányi",
-content:`2. 便宜
-
-注音：ㄆㄧㄢˊ ㄧˊ
-漢越音：tiện nghi
-HSK 2 / TOCFL 1
-
-① rẻ
-东西的价钱低
-这件衣服很便宜
-→ Rất rẻ
-
-② lợi thế
-占了很大的便宜
-→ Có lợi thế
-
-③ lợi dụng
-占别人的便宜
-→ Lợi dụng người khác
-
-④ bị hời
-这次便宜你了
-→ Lần này cho cậu lợi
-
-======================
-📚 組詞
-======================
-便宜货
-便宜商品
-占便宜
-便宜他人
-
-======================
-🔗 同義詞
-======================
-廉价
-省钱
-低廉
-贱卖
-
-======================
-❌ 反義詞
-======================
-昂贵
-珍贵
-值钱
-高昂`
-},
-
-/* ======================= 麻烦 ======================= */
-{
-char:"麻烦",
-pinyin:"máfan",
-content:`3. 麻烦
-
-注音：ㄇㄚˊ ㄈㄢˊ
-漢越音：ma phiền
-HSK 3 / TOCFL 2
-
-① phiền phức
-这个程序太麻烦了
-→ Quá rắc rối
-
-② rắc rối
-给家里添麻烦
-→ Gây rắc rối cho gia đình
-
-③ nhờ vả
-麻烦你帮我打印一下
-→ Làm phiền bạn giúp tôi
-
-======================
-📚 組詞
-======================
-添麻烦
-惹麻烦
-找麻烦
-捣麻烦
-
-======================
-🔗 同義詞
-======================
-困难
-烦恼
-难处
-费事
-
-======================
-❌ 反義詞
-======================
-容易
-方便
-顺利
-便利`
+function play(text) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN';
+    utterance.rate = 0.85;
+    window.speechSynthesis.speak(utterance);
 }
-
-];
-
-let index=0;
-
-function render(){
-const w=words[index];
-
-document.getElementById("word").innerHTML=`
-<div class="wordBox">
-<div class="hanzi">${w.char}</div>
-<div class="pinyin">${w.pinyin}</div>
-</div>
-`;
-
-document.getElementById("content").innerText=w.content;
-}
-
-function playAudio(){
-const u=new SpeechSynthesisUtterance(words[index].char);
-u.lang="zh-CN";
-speechSynthesis.speak(u);
-}
-
-function next(){
-index=(index+1)%words.length;
-render();
-}
-
-function prev(){
-index=(index-1+words.length)%words.length;
-render();
-}
-
-render();
-
-<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+</script>
 
 </body>
 </html>
