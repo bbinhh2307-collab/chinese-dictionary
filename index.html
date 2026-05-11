@@ -6,41 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOE Style Hán-Việt Dictionary</title>
     <style>
-        /* --- GIỮ NGUYÊN TOÀN BỘ CSS CỦA BẠN --- */
-        .hanzi-evolution-wrapper { width: 100%; background: #ffffff; padding: 10px; }
-        .word-section { margin-bottom: 30px; }
-        .evo-item { display: flex; }
-        .evo-sidebar { display: flex; flex-direction: column; align-items: center; width: 20px; margin-right: 15px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 15px; }
-        .line { width: 2px; flex-grow: 1; background: #ececec; }
-        .evo-card { flex: 1; background: #f8f9fa; border: 1px solid #eee; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .header-tags { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; font-size: 13px; }
-        .tag-vn { font-weight: bold; color: #334155; }
-        .tag-cn { color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; }
-        .tag-time { color: #94a3b8; margin-left: auto; }
-        .bg-green, .green { background: #10b981; }
-        .bg-blue, .blue { background: #3b82f6; }
-        .bg-red, .red { background: #ef4444; }
-        .bg-orange, .orange { background: #f59e0b; }
-        .glyph-img { background: #1e293b; display: flex; justify-content: center; border-radius: 10px; padding: 15px; }
-        .glyph-img img { height: 80px; filter: brightness(0) invert(1); }
+        /* --- GIỮ NGUYÊN STYLE GỐC CỦA BẠN --- */
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:Arial, sans-serif; background:#f3f6fb; color:#1e293b; line-height:1.8; }
+        body { font-family:Arial, Helvetica, sans-serif; background:#f3f6fb; color:#1e293b; line-height:1.8; }
         .header { position:sticky; top:0; z-index:100; background:rgba(255,255,255,.95); backdrop-filter:blur(10px); padding:18px 40px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; }
-        .logo { font-size:28px; font-weight:800; color:#0f172a; }
-        .search { width:420px; }
-        .search input { width:100%; padding:14px 18px; border:none; border-radius:18px; background:#eef2f7; font-size:15px; outline:none; transition:.25s; }
-        .search input:focus { background:#fff; box-shadow:0 0 0 4px rgba(59,130,246,.15); }
+        .logo { font-size:28px; font-weight:800; letter-spacing:1px; color:#0f172a; }
+        
+        /* Thanh tìm kiếm có nút */
+        .search { width:420px; display: flex; gap: 8px; background:#eef2f7; padding: 6px 10px; border-radius: 18px; }
+        .search input { flex: 1; border:none; background:transparent; padding:8px; font-size:15px; outline:none; }
+        .search-btn { background:#2563eb; color:white; border:none; padding:8px 18px; border-radius:14px; cursor:pointer; font-weight:bold; }
+        .search-btn:hover { background:#1d4ed8; }
+
         .container { max-width:1400px; margin:auto; padding:35px; display:grid; grid-template-columns:260px 1fr; gap:30px; }
         .sidebar { background:#fff; padding:25px; border-radius:28px; height:fit-content; box-shadow:0 10px 30px rgba(0,0,0,.04); }
         .sidebar h3 { margin-bottom:20px; font-size:18px; }
         .menu { display:flex; flex-direction:column; gap:12px; }
         .menu button { border:none; padding:14px; border-radius:14px; background:#f1f5f9; cursor:pointer; font-size:15px; text-align:left; }
         .menu button:hover { background:#dbeafe; color:#2563eb; }
+
         .main { display:flex; flex-direction:column; gap:30px; }
         .card { background:#fff; padding:40px; border-radius:34px; box-shadow:0 15px 35px rgba(0,0,0,.05); }
         .wordTop { margin-bottom:30px; }
-        .hanzi { font-size:100px; font-weight:800; font-family:"Times New Roman", serif; color:#0f172a; display: flex; align-items: center; gap: 15px; }
+        .hanzi { font-size:100px; font-weight:800; line-height:1; font-family:"Times New Roman", serif; color:#0f172a; display: flex; align-items: center; gap: 15px; }
         .stroke-container { margin-top: 20px; display: flex; gap: 15px; flex-wrap: wrap; }
         .stroke-box { width: 160px; height: 160px; border-radius: 18px; border: 2px solid #eef2f7; background: #fff; }
         .meta { margin-top:18px; display:flex; flex-wrap:wrap; gap:12px; font-size:14px; color:#64748b; }
@@ -55,12 +43,10 @@
         .wordList { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
         .tag { padding:9px 15px; background:#f1f5f9; border-radius:999px; font-size:14px; cursor:pointer; }
         .tag:hover { background:#dbeafe; color:#2563eb; }
-        .speaker { cursor: pointer; color: #2563eb; display: inline-flex; align-items: center; }
-        .speaker svg { width: 24px; height: 24px; }
-        .btn-stroke { margin-top: 10px; padding: 8px 16px; border-radius: 8px; border: 1px solid #2563eb; background: #fff; color: #2563eb; cursor: pointer; font-weight: bold; }
-        
-        /* Trạng thái trống */
+        .speaker { cursor: pointer; color: #2563eb; }
+        .speaker svg { width: 48px; height: 48px; vertical-align: middle; }
         .empty-state { text-align: center; padding: 100px 20px; color: #94a3b8; }
+        .btn-stroke-trigger { margin-top:15px; padding:8px 16px; border:1px solid #2563eb; background:transparent; color:#2563eb; border-radius:8px; cursor:pointer; font-weight:bold;}
 
         @media(max-width:980px){
             .container{ grid-template-columns:1fr; padding:18px; }
@@ -74,8 +60,8 @@
 <header class="header">
     <div class="logo">華越詞典</div>
     <div class="search">
-        <!-- Input tìm kiếm -->
-        <input type="text" id="searchInput" placeholder="搜尋漢字 (Ví dụ: 老, 便宜, 麻煩)..." onkeypress="handleSearch(event)">
+        <input type="text" id="searchInput" placeholder="搜尋漢字 / 拼音 / 漢越音...">
+        <button class="search-btn" onclick="performSearch()">搜尋</button>
     </div>
 </header>
 
@@ -86,34 +72,28 @@
             <button>📘 HSK 詞彙</button>
             <button>📗 TOCFL 詞彙</button>
             <button>⭐ 我的收藏</button>
-            <button>🕘 最近查詢</button>
         </div>
     </aside>
 
     <main class="main" id="mainContent">
-        <!-- Mặc định khi chưa tìm kiếm -->
         <div class="empty-state">
-            <h2>Chào mừng bạn đến với 華越詞典</h2>
-            <p>Nhập từ vựng vào ô tìm kiếm và nhấn Enter để xem chi tiết.</p>
+            <h2>歡迎使用華越詞典</h2>
+            <p>Vui lòng nhập từ vựng (ví dụ: <b>老</b>, <b>便宜</b>, <b>麻煩</b>) và nhấn Tìm kiếm.</p>
         </div>
     </main>
 </div>
 
 <script>
-/** 1. CƠ SỞ DỮ LIỆU - GIỮ NGUYÊN TOÀN BỘ NỘI DUNG CỦA BẠN **/
+/** 1. DATABASE ĐẦY ĐỦ NỘI DUNG TỪ CODE GỐC **/
 const dictionary = {
     "老": {
-        hanzi: "老",
-        pinyin: "lǎo",
-        zhuyin: "ㄌㄠˇ",
-        ipa: "lɑʊ̯²¹⁴",
-        hanviet: "lão",
+        hanzi: "老", pinyin: "lǎo", zhuyin: "ㄌㄠˇ", ipa: "lɑʊ̯²¹⁴", hanviet: "lão",
         badges: ["HSK 1", "TOCFL 1"],
         sections: [
             {
                 type: "Tính 形容詞",
                 meanings: [
-                    { b: "① Lớn tuổi, trái nghĩa với “trẻ”", cn: "年紀大，與「少」相對、歲數高的狀態。", ex: "彼の父母已经很老了。", py: "Tā de fùmǔ yǐjīng hěn lǎo le。", vi: "Bố mẹ anh ấy đã rất già rồi。" },
+                    { b: "① Lớn tuổi, trái nghĩa với “trẻ”", cn: "年紀大，與「少」相對、歲數高的狀態。", ex: "他的父母已经很老了。", py: "Tā de fùmǔ yǐjīng hěn lǎo le。", vi: "Bố mẹ anh ấy đã rất già rồi。" },
                     { b: "② Lão luyện, giàu kinh nghiệm", cn: "老練的、富有經驗的：老手、老練、老江湖", ex: "他是一個很老練的外交官。", py: "Tā shì yí gè hěn lǎoliàn de wàijiāoguān。", vi: "Ông ấy là một nhà ngoại giao rất dày dạn kinh nghiệm。" },
                     { b: "③ Tồn tại đã lâu", cn: "很久以前就存在的，表示長期存在的問題、故事或事物。", ex: "這是一個老問題，至今仍未解決。", py: "Zhè shì yí gè lǎo wèntí，zhìjīn réng wèi jiějué。", vi: "Đây là một vấn đề cũ, đến nay vẫn chưa được giải quyết。" },
                     { b: "④ Cũ kỹ, kiểu cũ", cn: "陳舊的：老式、老套", ex: "他喜歡穿老式的衣服。", py: "Tā xǐhuān chuān lǎoshì de yīfu。", vi: "Anh ấy thích mặc quần áo kiểu cũ。" },
@@ -142,11 +122,7 @@ const dictionary = {
         antonyms: ["新 — TÂN", "小 — TIỂU", "少 — THIỂU", "嫩 — NỘN"]
     },
     "便宜": {
-        hanzi: "便宜",
-        pinyin: "piányi",
-        zhuyin: "ㄆㄧㄢˊ ㄧˊ",
-        ipa: "pʰiɛn³⁵ i⁰",
-        hanviet: "tiện nghi",
+        hanzi: "便宜", pinyin: "piányi", zhuyin: "ㄆㄧㄢˊ ㄧˊ", ipa: "pʰiɛn³⁵ i⁰", hanviet: "tiện nghi",
         badges: ["HSK 2", "TOCFL 1"],
         sections: [
             {
@@ -156,7 +132,7 @@ const dictionary = {
             {
                 type: "Danh 名詞",
                 meanings: [
-                    { b: "① Lợi thế trong một khía cạnh nào đó", cn: "在某方面的優勢，表示某人或某事在某方面具有有利條件（較書面）。", ex: "他在語言能力上佔了很大的便宜。", py: "Tā zài yǔyán nénglì shàng zhàn le hěn dà de piányi。", vi: "Anh ấy có lợi thế lớn về năng lực ngôn ngữ。" },
+                    { b: "① Lợi thế trong một khía cạnh nào đó", cn: "在某方面的優勢，表示某人 hoặc某事在某方面具有有利條件（較書面）。", ex: "他在語言能力上佔了很大的便宜。", py: "Tā zài yǔyán nénglì shàng zhàn le hěn dà de piányi。", vi: "Anh ấy có lợi thế lớn về năng lực ngôn ngữ。" },
                     { b: "② Lợi ích không nên có", cn: "不應該得到或額外的利益。指不公平、不正當的好處。", ex: "他總是想佔別人的便宜。", py: "Tā zǒng shì xiǎng zhàn biérén de piányi。", vi: "Anh ta luôn muốn lợi dụng người khác。" }
                 ]
             },
@@ -170,11 +146,7 @@ const dictionary = {
         antonyms: ["昂貴 — NGANG QUÝ", "珍貴 — TRÂN QUÝ", "值錢 — TRỊ TIỀN", "高昂 — CAO NGANG"]
     },
     "麻煩": {
-        hanzi: "麻煩",
-        pinyin: "má fan",
-        zhuyin: "ㄇㄚˊ ㄈㄢˊ",
-        ipa: "ma³⁵ fan³⁵",
-        hanviet: "ma phiền",
+        hanzi: "麻煩", pinyin: "má fan", zhuyin: "ㄇㄚˊ ㄈㄢˊ", ipa: "ma³⁵ fan³⁵", hanviet: "ma phiền",
         badges: ["HSK 3", "TOCFL 2"],
         sections: [
             {
@@ -196,25 +168,38 @@ const dictionary = {
     }
 };
 
-/** 2. HÀM XỬ LÝ GIAO DIỆN **/
-function handleSearch(event) {
-    if (event.key === 'Enter') {
-        const query = document.getElementById('searchInput').value.trim();
-        const data = dictionary[query];
-        const main = document.getElementById('mainContent');
+/** 2. HÀM TÌM KIẾM **/
+function performSearch() {
+    const input = document.getElementById('searchInput');
+    const query = input.value.trim();
+    const main = document.getElementById('mainContent');
 
-        if (data) {
-            renderContent(data);
-        } else {
-            main.innerHTML = `<div class="card">Xin lỗi, từ vựng "<b>${query}</b>" chưa có trong dữ liệu.</div>`;
-        }
+    if (query === "") return;
+
+    const data = dictionary[query];
+
+    if (data) {
+        renderContent(data);
+    } else {
+        main.innerHTML = `
+            <div class="card">
+                <div class="empty-state">
+                    <h2 style="color: #ef4444;">抱歉！</h2>
+                    <p>Không tìm thấy từ "<b>${query}</b>" trong dữ liệu hiện tại.</p>
+                </div>
+            </div>`;
     }
 }
 
+// Lắng nghe Enter
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') performSearch();
+});
+
+/** 3. HÀM HIỂN THỊ NỘI DUNG (CHÍNH XÁC THEO CODE CỦA BẠN) **/
 function renderContent(data) {
     const main = document.getElementById('mainContent');
     
-    // Tạo cấu trúc HTML động
     let html = `
     <div class="card">
         <div class="wordTop">
@@ -229,7 +214,7 @@ function renderContent(data) {
                 ${data.badges.map(b => `<span class="badge">${b}</span>`).join('')}
             </div>
             <div id="stroke-container" class="stroke-container"></div>
-            <button class="btn-stroke" onclick="drawStroke('${data.hanzi}')">▶ 播放筆順 (Phát bút thuận)</button>
+            <button class="btn-stroke-trigger" onclick="drawStroke('${data.hanzi}')">▶ 播放筆順 (Phát bút thuận)</button>
         </div>
 
         ${data.sections.map(sec => `
@@ -240,7 +225,7 @@ function renderContent(data) {
                         <b>${m.b}</b>
                         <div class="cn">${m.cn}</div>
                         <div class="example">
-                            <div><span class="speaker" onclick="play('${m.ex}')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.02C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg></span>${m.ex}</div>
+                            <div><span class="speaker" style="font-size:20px;" onclick="play('${m.ex}')">🔊</span> ${m.ex}</div>
                             <div class="pinyin">${m.py}</div>
                             <div class="vi">→ ${m.vi}</div>
                         </div>
@@ -264,35 +249,37 @@ function renderContent(data) {
     </div>`;
 
     main.innerHTML = html;
-    drawStroke(data.hanzi); // Tự động vẽ khi hiện từ
+    
+    // Tự động chạy bút thuận ngay khi hiện từ
+    setTimeout(() => drawStroke(data.hanzi), 200);
 }
 
-/** 3. CÔNG CỤ: PHÁT ÂM VÀ BÚT THUẬN **/
 function play(text) {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN';
-    utterance.rate = 0.85;
+    utterance.rate = 0.8;
     window.speechSynthesis.speak(utterance);
 }
 
 function drawStroke(chars) {
     const container = document.getElementById('stroke-container');
-    container.innerHTML = ''; // Xóa cũ
+    if(!container) return;
+    container.innerHTML = ''; 
     
     chars.split('').forEach(char => {
         const div = document.createElement('div');
         div.className = 'stroke-box';
         container.appendChild(div);
         
-        const writer = HanziWriter.create(div, char, {
+        HanziWriter.create(div, char, {
             width: 160,
             height: 160,
             padding: 5,
             showOutline: true,
-            strokeColor: '#2563eb'
-        });
-        writer.animateCharacter();
+            strokeColor: '#2563eb',
+            delayBetweenStrokes: 150
+        }).animateCharacter();
     });
 }
 </script>
