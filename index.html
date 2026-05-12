@@ -118,6 +118,40 @@ const dictionary = {
         compounds: ["老師 — LÃO SƯ", "老婆 — LÃO BÀ", "老闆 — LÃO BẢN", "老公 — LÃO CÔNG"],
         synonyms: ["古 — CỔ", "長 — TRƯỜNG", "耆 — KÌ", "逝 — THỆ"],
         antonyms: ["新 — TÂN", "小 — TIỂU", "少 — THIỂU", "嫩 — NỘN"]
+        compounds: [
+    ${data.idioms ? `
+<div class="section">
+    <div class="sectionTitle">Thành ngữ liên quan 相關成語</div>
+    <div class="wordList">
+        ${data.idioms.map(t => `<div class="tag" onclick="play('${t.split(' — ')[0]}')">${t}</div>`).join('')}
+    </div>
+</div>
+` : ''}
+        "一家老小 — NHẤT GIA LÃO TIỂU", 
+        "丁老 — ĐINH LÃO", 
+        "七老八十 — THẤT LÃO BÁT THẬP", 
+        "七老八老 — THẤT LÃO BÁT LÃO", 
+        "三朝元老 — TAM TRIỀU NGUYÊN LÃO", 
+        "三老 — TAM LÃO", 
+        "不伏老 — BẤT PHỤC LÃO", 
+        "不服老 — BẤT PHỤC LÃO", 
+        "不老氣 — BẤT LÃO KHÍ", 
+        "不老藥 — BẤT LÃO DƯỢC", 
+        "不老長生 — BẤT LÃO TRƯỜNG SINH"
+    ],
+    idioms: [
+        "白頭偕老 — BẠCH ĐẦU GIAI LÃO",
+        "返老還童 — PHẢN LÃO HOÀN ĐỒNG",
+        "老蚌生珠 — LÃO BẠNG SINH CHU",
+        "老成持重 — LÃO THÀNH TRÌ TRỌNG",
+        "老當益壯 — LÃO ĐƯƠNG ÍCH TRÁNG",
+        "老驥伏櫪 — LÃO KÍ PHỤC LỊCH",
+        "老奸巨猾 — LÃO GIAN CỰ HOẠT",
+        "老馬識途 — LÃO MÃ THỨC ĐỒ",
+        "老謀深算 — LÃO MƯU THÂM TOÁN",
+        "老氣橫秋 — LÃO KHÍ HOÀNH THU",
+        "老生常談 — LÃO SINH THƯỜNG ĐÀM"
+    ],
     },
     "便宜": {
         hanzi: "便宜", pinyin: "piányi", zhuyin: "ㄆㄧㄢˊ ㄧˊ", ipa: "pʰiɛn³⁵ i⁰", hanviet: "tiện nghi",
