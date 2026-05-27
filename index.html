@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>華英電子詞典 - Professional Chinese-English Dictionary</title>
+    <title>專業漢英詞典 - Professional Chinese-English Dictionary</title>
     <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
     <style>
         :root {
@@ -215,22 +215,6 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin: 20px 0;
-            border-radius: 12px;
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
         .audio-group {
             margin: 15px 0;
         }
@@ -313,7 +297,7 @@
 <script>
 let totalScore = 0;
 
-// Hệ thống cơ sở dữ liệu ẩn hoàn chỉnh
+// Hệ thống cơ sở dữ liệu ẩn hoàn chỉnh (Đã loại bỏ các trường videoUrl)
 const dictionary = {
   "學習": {
     pinyin: "xué xí",
@@ -354,9 +338,9 @@ const dictionary = {
       v: { en: "To develop / To expand", ex: "這家公司發展得很快。(This company is developing very fast.)" },
       n: { en: "Development / Growth", ex: "經濟的發展改變了人們的生活。(Economic development has changed people's lives.)" },
       adj: { en: "Developing / Developmental", ex: "發展中國家面臨著許多挑戰。(Developing countries face many challenges.)" },
-      adv: { en: "In terms of development", ex: "城鎮在發展上... (Towns need long-term planning.)" }
+      adv: { en: "In terms of development", ex: "城鎮在發展上需要長遠規劃。(Towns need long-term planning in terms of development.)" }
     },
-    nuance: "<b>發展 (Develop) vs. 生長 (Grow):</b><br>1. <b>發展</b> is broad and can apply to abstract concepts.<br>2. <b>生長</b> usually implies physical growth of biological organisms.",
+    nuance: "<b>發展 (Develop) vs. 生長 (Grow):</b><br>1. <b>發展</b> is broad and can apply to abstract concepts like economics, society, relations, and skills.<br>2. <b>生長</b> usually implies physical growth of biological organisms like plants and animals.",
     quiz: [
       { q: "What is the Pinyin for '發展'?", a: ["fā zhǎn", "fá zhàn", "fā zhān"], c: 0 },
       { q: "Which part of speech can '發展' be used as?", a: ["Verb only", "Noun only", "Both Noun and Verb"], c: 2 }
@@ -371,15 +355,15 @@ const dictionary = {
     image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600",
     wordFamily: ["Planning (規劃)", "Calculation (計算)", "Budget (預算)"],
     synonyms: "計劃 (To plan), 企圖 (To attempt), 準備 (To prepare)",
-    antonyms: "盲目 (Blindly), 隨意 (Randomly)",
-    idioms: ["如意算盤 (Wishful thinking)"],
+    antonyms: "盲目 (Blindly / Without plan), 隨意 (Randomly)",
+    idioms: ["如意算盤 (Wishful thinking / Smart calculation)"],
     pos: {
       v: { en: "To plan / To intend", ex: "你畢業以後打算做什麼？(What do you plan to do after graduation?)" },
       n: { en: "Plan / Intention", ex: "你心裡有什麼打算？(What kind of plans do you have in mind?)" },
       adj: { en: "Planned (Informal)", ex: "這是一筆打算好的開銷。(This is a planned expense.)" },
-      adv: { en: "Intentionally", ex: "他本來就打算這麼做。(He intended to do it this way.)" }
+      adv: { en: "Intentionally (Colloquial)", ex: "他本來就打算這麼做。(He intended to do it this way from the start.)" }
     },
-    nuance: "<b>打算 (Dǎsuàn) vs. 計劃 (Jìhuà):</b><br>1. <b>打算</b> is more casual and common in spoken Chinese.<br>2. <b>計劃</b> is more formal, structured, and long-term.",
+    nuance: "<b>打算 (Dǎsuàn) vs. 計劃 (Jìhuà):</b><br>1. <b>打算</b> is more casual and common in daily spoken Chinese (e.g., weekend plans).<br>2. <b>計劃</b> is more formal, structured, and often used for official projects, business, or long-term career goals.",
     quiz: [
       { q: "Which English word matches '打算'?", a: ["Forget", "Plan", "History"], c: 1 },
       { q: "What tone is the character '算' (suàn)?", a: ["1st tone", "3rd tone", "4th tone"], c: 2 }
@@ -387,15 +371,15 @@ const dictionary = {
   }
 };
 
-// KỸ THUẬT SỬA LỖI ENTER CHUẨN XÁC: Lắng nghe sự kiện bằng addEventListener
+// Trực tiếp lắng nghe sự kiện phím trên ô tìm kiếm bằng Javascript để đảm bảo phím Enter hoạt động tuyệt đối
 document.getElementById("search").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
-        event.preventDefault(); // Chặn hành vi submit làm reload trang vô lý
-        executeSearch();        // Chạy hàm tìm kiếm
+        event.preventDefault(); // Ngăn trình duyệt reload trang trái phép
+        executeSearch();        // Kích hoạt tìm kiếm dữ liệu ẩn
     }
 });
 
-// Logic thực thi tìm kiếm nâng cao (Dữ liệu ẩn hoàn toàn)
+// Xử lý tìm kiếm nâng cao từ bộ nhớ ẩn
 function executeSearch() {
     const query = document.getElementById("search").value.trim().toLowerCase();
     const suggestBox = document.getElementById("suggest");
@@ -403,7 +387,7 @@ function executeSearch() {
 
     if (!query) return;
 
-    // 1. So khớp trực tiếp chữ Hán tự
+    // 1. So khớp trực tiếp chữ Hán gốc
     for (let key in dictionary) {
         if (query === key.toLowerCase()) {
             showWord(key);
@@ -411,7 +395,7 @@ function executeSearch() {
         }
     }
 
-    // 2. So khớp Pinyin viết liền hoặc từ khóa mảng mở rộng tiếng Anh
+    // 2. So khớp Pinyin không dấu cách hoặc từ khóa tiếng Anh mở rộng
     for (let key in dictionary) {
         const cleanPinyin = dictionary[key].pinyin.toLowerCase().replace(/\s+/g, "");
         if (query === cleanPinyin || dictionary[key].searchKeywords.includes(query)) {
@@ -420,7 +404,7 @@ function executeSearch() {
         }
     }
 
-    // 3. Tìm kiếm gần đúng (Fuzzy search)
+    // 3. Tìm kiếm gần đúng (Fuzzy Match)
     for (let key in dictionary) {
         const cleanPinyin = dictionary[key].pinyin.toLowerCase().replace(/\s+/g, "");
         if (key.includes(query) || cleanPinyin.includes(query) || dictionary[key].searchKeywords.some(k => k.includes(query))) {
@@ -429,16 +413,16 @@ function executeSearch() {
         }
     }
 
-    // Trạng thái lỗi khi không tìm thấy
+    // Hiển thị trạng thái không tìm thấy kết quả phù hợp
     document.getElementById("result").innerHTML = `
         <div class="word-card error-state">
             <h2>抱歉！找不到相關結果</h2>
-            <p>Từ khóa "<b>${query}</b>" không có trong hệ thống dữ liệu ẩn. Vui lòng gõ chính xác: <b>study, develop, plan, 學習, 發展, 打算</b>.</p>
+            <p>Từ khóa "<b>${query}</b>" chưa khớp với từ vựng ẩn nào. Hãy thử: <b>study, develop, plan, 學習, 發展, 打算</b>.</p>
         </div>
     `;
 }
 
-// Xử lý hộp gợi ý (dropdown menu) khi đang gõ chữ
+// Xử lý hiển thị danh sách gợi ý khi gõ chữ
 function handleSuggest() {
     const query = document.getElementById("search").value.trim().toLowerCase();
     const suggestBox = document.getElementById("suggest");
@@ -475,7 +459,7 @@ function handleSuggest() {
     }
 }
 
-// Hàm render dựng cấu trúc HTML động từ kho lưu trữ ẩn
+// Hàm render dữ liệu ẩn ra cấu trúc HTML hiển thị chi tiết từ vựng (Đã xóa video Youtube)
 function showWord(wordKey) {
     const data = dictionary[wordKey];
     const resultDiv = document.getElementById("result");
@@ -531,7 +515,7 @@ function showWord(wordKey) {
             </div>
 
             <div class="nuance-box">
-                <span class="nuance-title">🔍 Semantic Nuances </span>
+                <span class="nuance-title">🔍 Semantic Nuances (Phân biệt ngữ nghĩa)</span>
                 <div>${data.nuance}</div>
             </div>
 
@@ -550,15 +534,11 @@ function showWord(wordKey) {
                 <img src="${data.image}" class="word-img" alt="${wordKey}">
             </div>
 
-            <div class="video-container">
-                <iframe src="${data.videoUrl}" allowfullscreen></iframe>
-            </div>
-
             ${quizHtml}
         </div>
     `;
 
-    // Gọi thư viện vẽ thứ tự nét chữ từ API HanziWriter bên ngoài vào vùng ẩn vừa hiển thị
+    // Gọi API HanziWriter động vẽ nét chữ lên vùng chứa ẩn vừa mở
     wordKey.split("").forEach(char => {
         const span = document.createElement("span");
         span.className = "hanzi-writer-container";
@@ -575,7 +555,7 @@ function showWord(wordKey) {
     });
 }
 
-// Chức năng phát âm Audio
+// Chức năng phát âm Text-to-Speech
 function speak(text, lang = 'zh-CN') {
     window.speechSynthesis.cancel();
     const msg = new SpeechSynthesisUtterance(text);
@@ -583,7 +563,7 @@ function speak(text, lang = 'zh-CN') {
     window.speechSynthesis.speak(msg);
 }
 
-// Chấm điểm Quiz trắc nghiệm ngắn
+// Chấm điểm Quiz Mini-Test
 function checkQuiz(btn, qIdx, oIdx, correctIdx, wordKey) {
     const parent = btn.parentElement;
     const options = parent.querySelectorAll(".quiz-option");
@@ -603,7 +583,7 @@ function checkQuiz(btn, qIdx, oIdx, correctIdx, wordKey) {
     document.getElementById(`score-${wordKey}`).innerText = `Current Session Score: ${totalScore}`;
 }
 
-// Click chuột bên ngoài vùng search sẽ đóng dropdown menu
+// Ẩn bảng menu gợi ý khi click ra ngoài ô input tìm kiếm
 document.addEventListener("click", function(e) {
     if (e.target.id !== "search") {
         document.getElementById("suggest").style.display = "none";
