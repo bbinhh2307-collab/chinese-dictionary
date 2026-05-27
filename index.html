@@ -293,7 +293,8 @@
 
 <div class="container">
     <div class="header">
-        <h1>華英電子詞典 </h1>
+        <h1>漢英專業學術詞典 (Song ngữ Thông minh)</h1>
+        <p>Nhập Tiếng Trung / Tiếng Anh (study, develop, plan) / Pinyin rồi ấn Enter để tra cứu</p>
     </div>
 
     <div class="search-container">
@@ -321,7 +322,8 @@ const dictionary = {
     englishIpa: "/ˈstʌdi/ & /ˈlɜːrn/",
     searchKeywords: ["study", "learn", "studying", "learning", "xuexi"],
     image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600",
-    wordFamily: ["Student (學生)", "School (學校)", "Scholar (學者)", "Academic (學術)"]
+    wordFamily: ["Student (學生)", "School (學校)", "Scholar (學者)", "Academic (學術)"],
+    videoUrl: "https://www.youtube.com/embed/SuMKdrdUsCw",
     synonyms: "研習 (To study), 修習 (To take a course), 鑽研 (To delve into)",
     antonyms: "荒廢 (To neglect), 怠惰 (Idle)",
     idioms: ["學而時習之 (Learn and practice constantly)", "學無止境 (Knowledge has no limit)"],
@@ -345,7 +347,8 @@ const dictionary = {
     englishIpa: "/dɪˈveləp/ & /ˈɡroʊθ/",
     searchKeywords: ["develop", "development", "growth", "grow", "fazhan"],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600",
-    wordFamily: ["Developer (開發者)", "Evolution (演變)", "Sustainability (永續性)"]
+    wordFamily: ["Developer (開發者)", "Evolution (演變)", "Sustainability (永續性)"],
+    videoUrl: "https://www.youtube.com/embed/O34789v6V3E",
     synonyms: "發育 (To grow), 開發 (To develop/exploit), 擴展 (To expand)",
     antonyms: "倒退 (To regress), 萎縮 (To shrink), 停滯 (Stagnate)",
     idioms: ["全面發展 (All-round development)", "可持續發展 (Sustainable development)"],
@@ -369,6 +372,7 @@ const dictionary = {
     searchKeywords: ["plan", "intend", "intention", "planning", "dasuan"],
     image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600",
     wordFamily: ["Planning (規劃)", "Calculation (計算)", "Budget (預算)"],
+    videoUrl: "https://www.youtube.com/embed/L46z9L80Oeo",
     synonyms: "計劃 (To plan), 企圖 (To attempt), 準備 (To prepare)",
     antonyms: "盲目 (Blindly), 隨意 (Randomly)",
     idioms: ["如意算盤 (Wishful thinking)"],
@@ -530,7 +534,7 @@ function showWord(wordKey) {
             </div>
 
             <div class="nuance-box">
-                <span class="nuance-title">🔍 Semantic Nuances </span>
+                <span class="nuance-title">🔍 Semantic Nuances (Phân biệt ngữ nghĩa)</span>
                 <div>${data.nuance}</div>
             </div>
 
